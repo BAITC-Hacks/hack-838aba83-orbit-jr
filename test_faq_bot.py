@@ -14,7 +14,7 @@ class FAQBotTests(unittest.TestCase):
 
     def test_matches_paraphrased_questions(self) -> None:
         self.assertIn("18:00", answer_question("Во сколько встречаемся?", self.entries))
-        self.assertIn("Арик и Макс", answer_question("Кто у нас в команде", self.entries))
+        self.assertIn("60, Арик и Макс", answer_question("Кто у нас в команде", self.entries))
         self.assertIn("FAQ-бот", answer_question("Что за трек", self.entries))
         self.assertIn("GitHub", answer_question("Куда сдавать проект", self.entries))
         self.assertIn("призы", answer_question("Что получат победители", self.entries))
