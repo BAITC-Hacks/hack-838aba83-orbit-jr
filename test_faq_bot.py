@@ -23,6 +23,10 @@ class FAQBotTests(unittest.TestCase):
         self.assertEqual(answer_question("Какая сегодня погода?", self.entries), UNKNOWN_ANSWER)
         self.assertEqual(answer_question("", self.entries), UNKNOWN_ANSWER)
 
+    def test_match_survives_extra_conversational_words(self) -> None:
+        answer = answer_question("Кто вообще в моей команде, подскажи мне", self.entries)
+        self.assertIn("60, Арик и Макс", answer)
+
     def test_load_faq_rejects_empty_file(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "empty.txt"

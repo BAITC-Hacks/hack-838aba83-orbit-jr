@@ -69,7 +69,9 @@ def _score(query: str, question: str) -> float:
     if not query_tokens or not question_tokens:
         return 0.0
     overlap = query_tokens & question_tokens
-    keyword_score = len(overlap) / len(query_tokens)
+    # One meaningful shared keyword is enough for this small, fixed FAQ.
+    # The floor keeps extra conversational words from hiding a clear intent.
+    keyword_score = max(0.5, len(overlap) / len(query_tokens)) if overlap else 0.0
     fuzzy_score = difflib.SequenceMatcher(
         None, " ".join(sorted(query_tokens)), " ".join(sorted(question_tokens))
     ).ratio()
